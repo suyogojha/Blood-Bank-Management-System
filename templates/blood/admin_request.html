@@ -1,0 +1,64 @@
+{% extends 'blood/adminbase.html' %}
+{% block content %}
+{% load widget_tweaks %}
+{%load static%}
+<br><br>
+<div class="container">
+    {% if requests %}
+    <H4 class="text-center">Blood Requested</H4><br>
+    {% if message %}
+   <h5 class="text-center" style="color: red;"> {{message}}</h5><br>
+{% else %}
+
+{% endif %}
+    <table class="table table-light table-hover table-bordered table-striped">
+        <thead class="bg-dark">
+            <tr>
+                <th scope="col" style="color: rgb(192, 192, 192);">Patient's Name</th>
+                <th scope="col" style="color: rgb(192, 192, 192);">Age</th>
+                
+                <th scope="col" style="color: rgb(192, 192, 192);">Reason</th>
+                <th scope="col" style="color: rgb(192, 192, 192);">Blood Group</th>
+                <th scope="col" style="color: rgb(192, 192, 192);">Unit (ml)</th>
+                <th scope="col" style="color: rgb(192, 192, 192);">Date</th>
+                <th scope="col" style="color: rgb(192, 192, 192);">Status</th>
+                <th style="color: rgb(192, 192, 192);">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for t in requests %}
+            <tr>
+                <td> {{t.patient_name}}</td>
+                <td>{{t.patient_age}}</td>
+                
+                
+                <td>{{t.reason}}</td>
+                <td>{{t.bloodgroup}}</td>
+                <td>{{t.unit}}</td>
+                <td>{{t.date}}</td>
+                <td>{{t.status}}</td>
+                
+                
+                <td>
+                   
+                    <button class="btn btn-success btn-sm"><a  style="text-decoration: none;color: white;" href="{% url 'update-approve-status' t.id  %}"><i class="fa fa-check"></i> Approve</a> </button>
+                    <button class="btn btn-danger btn-sm"><a  style="text-decoration: none;color: white;" href="{% url 'update-reject-status' t.id  %}"><i class="fa fa-times"></i> Reject</a> </button>
+                    
+                </td>
+            </tr>
+            {% endfor %}
+
+        </tbody>
+    
+    </table>
+{% else %}
+<div class="alert alert-danger" role="alert">
+    No Blood Request By Patient/Donor!
+  </div>
+
+{% endif %}
+
+</div>
+
+
+{% endblock content %}

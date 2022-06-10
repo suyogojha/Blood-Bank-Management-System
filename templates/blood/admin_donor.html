@@ -1,0 +1,41 @@
+{% extends 'blood/adminbase.html' %}
+{% block content %}
+{% load widget_tweaks %}
+{%load static%}
+<br><br>
+<div class="container">
+    <H4 class="text-center">Donor's Detail</H4><br>
+    <table class="table table-light table-hover table-bordered table-striped">
+        <thead class="bg-dark">
+            <tr>
+                <th scope="col" style="color: rgb(192, 192, 192);">Name</th>
+                <th scope="col" style="color: rgb(192, 192, 192);">Photo</th>
+                <th scope="col" style="color: rgb(192, 192, 192);">Blood Group</th>
+                <th scope="col" style="color: rgb(192, 192, 192);">Address</th>
+                <th scope="col" style="color: rgb(192, 192, 192);">Contact</th>
+                <th style="color: rgb(192, 192, 192);">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for t in donors %}
+            <tr>
+                <td> {{t.get_name}}</td>
+                <td> <img src="{% static t.profile_pic.url %}" alt="Profile Pic" height="40px" width="40px" /></td>
+                <td>{{t.bloodgroup}}</td>
+                <td>{{t.address}}</td>
+                <td>{{t.mobile}}</td>
+                
+                <td>
+                    <button class="btn btn-success btn-sm"><a  style="text-decoration: none;color: white;" href="{% url 'update-donor' t.id  %}">Edit</a> </button>
+                    <button class="btn btn-danger btn-sm"><a  style="text-decoration: none;color: white;" href="{% url 'delete-donor' t.id  %}">Delete</a> </button>
+                </td>
+            </tr>
+            {% endfor %}
+
+        </tbody>
+    
+    </table>
+</div>
+
+
+{% endblock content %}
